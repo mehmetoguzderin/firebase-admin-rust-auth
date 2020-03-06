@@ -1,0 +1,13 @@
+[package]
+name = "firebase-admin-rust-auth"
+description = "Firebase Admin Rust Auth"
+version = "0.0.0"
+authors = ["Mehmet Oguz Derin <mehmetoguzderin@mehmetoguzderin.com>"]
+edition = "2018"
+license = "MIT"
+repository = "https://github.com/mehmetoguzderin/firebase-admin-rust-auth"
+
+[dependencies]
+jsonwebtoken = "*"
+reqwest = { version = "*", features = ["json"] }
+serde = { version = "*", features = ["derive"] }
