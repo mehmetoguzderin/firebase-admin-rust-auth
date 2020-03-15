@@ -1,7 +1,7 @@
 [package]
 name = "firebase-admin-rust-auth"
 description = "Firebase Admin Rust Auth"
-version = "0.0.3"
+version = "0.0.4"
 authors = ["Mehmet Oguz Derin <mehmetoguzderin@mehmetoguzderin.com>"]
 edition = "2018"
 license = "MIT"
