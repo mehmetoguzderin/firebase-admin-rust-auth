@@ -56,7 +56,7 @@ pub async fn verify_id_token_with_project_id(
         &validation,
     ) {
         Ok(value) => value.claims,
-        Err(_) => return Err(std::boxed::Box::from(String::from("Decoded Id Token"))),
+        Err(error) => return Err(std::boxed::Box::from(format!("{:?}", error))),
     };
 
     Ok(decoded_id_token)
