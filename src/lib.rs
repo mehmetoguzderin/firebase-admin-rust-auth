@@ -1,11 +1,11 @@
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct DecodedIdToken {
-    aud: String,
-    auth_time: usize,
-    exp: usize,
-    iat: usize,
-    iss: String,
-    sub: String,
+    pub aud: String,
+    pub auth_time: usize,
+    pub exp: usize,
+    pub iat: usize,
+    pub iss: String,
+    pub sub: String,
 }
 
 pub async fn verify_id_token_with_project_id(
