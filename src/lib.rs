@@ -42,19 +42,13 @@ pub async fn verify_id_token_with_project_id(
         None => return Err(std::boxed::Box::from(String::from("Public Key"))),
     };
 
-    let aud: std::collections::HashSet<String> = vec![project_id.to_string()].into_iter().collect();
+    /*
+    let mut validation = jsonwebtoken::Validation::new(jsonwebtoken::Algorithm::RS256);
+    validation.set_audience(&[project_id.to_string()]);
+    validation.iss = Some(format!("https://securetoken.google.com/{}", project_id));
+    */
 
-    let validation = jsonwebtoken::Validation {
-        aud: Some(aud),
-        iss: Some(format!("https://securetoken.google.com/{}", project_id)),
-        ..jsonwebtoken::Validation::new(jsonwebtoken::Algorithm::RS256)
-    };
-
-    let decoded_id_token = match jsonwebtoken::decode::<DecodedIdToken>(
-        &token,
-        &jsonwebtoken::DecodingKey::from_secret(public_key.as_bytes()),
-        &validation,
-    ) {
+    let decoded_id_token = match jsonwebtoken::dangerous_unsafe_decode::<DecodedIdToken>(&token) {
         Ok(value) => value.claims,
         Err(error) => return Err(std::boxed::Box::from(format!("{:?}", error))),
     };
