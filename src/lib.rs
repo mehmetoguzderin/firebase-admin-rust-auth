@@ -1,4 +1,7 @@
-#[derive(Debug, serde::Serialize, serde::Deserialize)]
+#[macro_use]
+extern crate serde;
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DecodedIdToken {
     pub aud: String,
     pub auth_time: usize,
@@ -29,9 +32,9 @@ pub async fn verify_id_token_with_project_id(
     let public_keys = reqwest::get(
         "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com",
     )
-    .await?
-    .json::<std::collections::HashMap<String, String>>()
-    .await?;
+        .await?
+        .json::<std::collections::HashMap<String, String>>()
+        .await?;
 
     if !public_keys.contains_key(&kid) {
         return Err(std::boxed::Box::from(String::from("Public Keys Kid")));
@@ -48,7 +51,7 @@ pub async fn verify_id_token_with_project_id(
     validation.iss = Some(format!("https://securetoken.google.com/{}", project_id));
     */
 
-    let decoded_id_token = match jsonwebtoken::dangerous_unsafe_decode::<DecodedIdToken>(&token) {
+    let decoded_id_token = match jsonwebtoken::dangerous_insecure_decode::<DecodedIdToken>(&token) {
         Ok(value) => value.claims,
         Err(error) => return Err(std::boxed::Box::from(format!("{:?}", error))),
     };
