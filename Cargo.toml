@@ -8,6 +8,6 @@ license = "MIT"
 repository = "https://github.com/mehmetoguzderin/firebase-admin-rust-auth"
 
 [dependencies]
-jsonwebtoken = "7.1.0"
-reqwest = { version = "0.10.4", features = ["json"] }
-serde = { version = "1.0", features = ["derive"] }
+jsonwebtoken = "7.2.0"
+reqwest = { version = "0.11.0", features = ["json"] }
+serde = { version = "1.0.123", features = ["derive"] }
